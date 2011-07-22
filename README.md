@@ -32,9 +32,9 @@ The best way to test out is to use http://www.postbin.org/.
 
 ## Payload structure
 
-Plugin will sent JSON-encoded data via POST method.
+Plugin will sent a payload in one of the formats (FORM, JSON, YAML, XML) data via POST method.
 
-Here is the sample payload:
+Here is an example data:
 
     {
       "capistrano": {
