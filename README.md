@@ -20,6 +20,8 @@ Then configure URL:
 To test if it works type:
 
     cap payload:deploy
+    
+The best way to test out is to use http://www.postbin.org/.
 
 ## Payload structure
 
@@ -32,6 +34,7 @@ Here is the sample payload:
         "application": "APP_NAME",
         "deployer": "sosedoff",
         "timestamp": "2011-07-21 19:09:52 -0500",
+        "message": "Release 1.0.0", 
         "source": {
           "branch": "master",
           "revision": "b18ffa822c16c028765800d0c4d22bfd5e4f3bf9",

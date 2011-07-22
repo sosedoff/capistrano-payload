@@ -26,8 +26,9 @@ module CapistranoPayload
         namespace :payload do
           task :deploy, :roles => :app do
             logger.debug("Sending deployment notification to #{fetch(:payload_url)}")
+            message = Capistrano::CLI.ui.ask("Deployment message (none): ", nil)
             begin
-              CapistranoPayload::Payload.new('deploy', payload_data).deliver(fetch(:payload_url))
+              CapistranoPayload::Payload.new('deploy', message, payload_data).deliver(fetch(:payload_url))
             rescue DeliveryError => err
               logger.debug("Payload delivery error: #{err.message}")
             end
@@ -35,8 +36,9 @@ module CapistranoPayload
           
           task :rollback, :roles => :app do
             logger.debug("Sending rollback notification to #{fetch(:payload_url)}")
+            message = Capistrano::CLI.ui.ask("Rollback message (none): ", nil)
             begin
-              CapistranoPayload::Payload.new('rollback', payload_data).deliver(fetch(:payload_url))
+              CapistranoPayload::Payload.new('rollback', message, payload_data).deliver(fetch(:payload_url))
             rescue DeliveryError => err
               logger.debug("Payload delivery error: #{err.message}")
             end

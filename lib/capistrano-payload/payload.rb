@@ -6,19 +6,21 @@ module CapistranoPayload
   
   class Payload
     attr_reader :action
+    attr_reader :message
     attr_reader :data
     attr_reader :params
     
     # Initialize a new Payload object
     #
-    #   action - Deployment action (deploy, rollback)
-    #   data   - Deployment parameters
-    #   params - Extra parameters to payload (api_key, etc.), default: {}
-    #            Could not contain 'capistrano' key. Will be removed if present.
+    # action  - Deployment action (deploy, rollback)
+    # message - Deployment message (optional)
+    # data    - Deployment parameters
+    # params  - Extra parameters to payload (api_key, etc.), default: {}
+    #           Could not contain 'capistrano' key. Will be removed if present.
     # 
-    def initialize(action, data, params={})
+    def initialize(action, message, data, params={})
       @action = action
-      @data   = data.merge(:action => action)
+      @data   = data.merge(:action => action, :message => message.strip)
       @params = params
       
       # Check if we have 'capistrano' keys (string or symbolic)
