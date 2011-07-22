@@ -1,3 +1,5 @@
+require 'rest-client'
+
 module CapistranoPayload
   module Request
     TIMEOUT      = 4
@@ -6,7 +8,8 @@ module CapistranoPayload
     CONTENT_TYPES = {
       :form => 'application/x-www-form-urlencoded',
       :json => 'application/json',
-      :yaml => 'application/x-yaml'
+      :yaml => 'application/x-yaml',
+      :xml  => 'application/xml'
     }.freeze
     
     # Performs a HTTP request

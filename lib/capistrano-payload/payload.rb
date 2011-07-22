@@ -1,27 +1,14 @@
-require 'rest-client'
-require 'multi_json'
-require 'yaml'
-
 module CapistranoPayload
   class ConfigurationError < StandardError ; end
   class DeliveryError      < StandardError ; end
   
   class Payload
+    include CapistranoPayload::Format
     include CapistranoPayload::Request
     
     # Allowed actions
     ACTIONS = ['deploy', 'rollback']
-    
-    # Allowed formats
-    FORMATS = [:form, :json, :yaml]
-    
-    # Method processing assignment
-    FORMAT_METHODS = {
-      :form => :to_hash,
-      :json => :to_json,
-      :yaml => :to_yaml
-    }
-    
+  
     attr_reader :action
     attr_reader :message
     attr_reader :data
@@ -71,29 +58,6 @@ module CapistranoPayload
       rescue Exception => ex
         raise DeliveryError, ex.message
       end
-    end
-    
-    protected
-    
-    # Returns a payload as HASH
-    #
-    def to_hash
-      payload = {
-        :capistrano      => @data,
-        :payload_version => CapistranoPayload::VERSION
-      }
-    end
-    
-    # Returns a payload as JSON
-    #
-    def to_json
-      MultiJson.encode(self.to_hash)
-    end
-    
-    # Returns a payload as YAML
-    #
-    def to_yaml
-      YAML.dump(self.to_hash)
     end
   end
 end
