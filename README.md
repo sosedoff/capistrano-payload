@@ -33,7 +33,10 @@ Here is the sample payload:
       "capistrano": {
         "version": "2.6.0",
         "application": "APP_NAME",
-        "deployer": "sosedoff",
+        "deployer": {
+          "user": "sosedoff",
+          "hostname": "localhost",
+        }
         "timestamp": "2011-07-21 19:09:52 -0500",
         "message": "Release 1.0.0", 
         "source": {
@@ -42,7 +45,8 @@ Here is the sample payload:
           "repository": "git@github.com:repository.git"
         },
         "action": "deploy"
-      }
+      },
+      "payload_version": "0.1.4"
     }
 
 That's it. Ready to roll.
