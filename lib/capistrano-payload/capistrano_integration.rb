@@ -10,8 +10,9 @@ module CapistranoPayload
           abort 'Payload URL required! set :payload_url'
         }
         
-        _cset(:payload_format) { :json }
-        _cset(:payload_params) { Hash.new }
+        _cset(:payload_message) { true }
+        _cset(:payload_format)  { :json }
+        _cset(:payload_params)  { Hash.new }
         
         _cset(:payload_data) {
           {
@@ -33,7 +34,7 @@ module CapistranoPayload
         namespace :payload do
           task :deploy, :roles => :app do
             logger.debug("Sending deployment notification to #{fetch(:payload_url)}")
-            message = Capistrano::CLI.ui.ask("Deployment message (none): ", nil)
+            message = payload_message == true ? Capistrano::CLI.ui.ask("Deployment message (none): ", nil) : ''
             begin
               CapistranoPayload::Payload.new('deploy', message, payload_data, payload_format, payload_params).deliver(payload_url)
             rescue DeliveryError => err
@@ -45,7 +46,7 @@ module CapistranoPayload
           
           task :rollback, :roles => :app do
             logger.debug("Sending rollback notification to #{fetch(:payload_url)}")
-            message = Capistrano::CLI.ui.ask("Rollback message (none): ", nil)
+            message = payload_message == true ? Capistrano::CLI.ui.ask("Rollback message (none): ", nil) : ''
             begin
               CapistranoPayload::Payload.new('rollback', message, payload_data, payload_format, payload_params).deliver(payload_url)
             rescue DeliveryError => err

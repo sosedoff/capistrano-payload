@@ -25,9 +25,10 @@ The best way to test out is to use http://www.postbin.org/.
 
 ## Options
 
-- payload_url    &mdash; Primary URL where the data would be sent (required)
-- payload_format &mdash; Payload format. Must be one of :json (default), :form.
-- payload_params &mdash; Extra parameters to the request (api_key, etc.). *Note: extra parameters wont be added to the payload.*
+- payload_url     &mdash; Primary URL where the data would be sent (required)
+- payload_format  &mdash; Payload format. Must be one of :json (default), :form.
+- payload_params  &mdash; Extra parameters to the request (api_key, etc.). *Note: extra parameters wont be added to the payload.*
+- payload_message &mdash; Ask for deployment comment. (default: true)
 
 ## Payload structure
 
