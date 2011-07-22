@@ -25,8 +25,8 @@ module CapistranoPayload
       
       # Check if we have 'capistrano' keys (string or symbolic)
       unless @params.empty?
-        @params.delete(:capistrano)
-        @params.delete('capistrano')
+        @params.delete(:capistrano)      ; @params.delete('capistrano')
+        @params.delete(:payload_version) ; @params.delete('payload_version')
       end
     end
     
@@ -35,7 +35,11 @@ module CapistranoPayload
     #   url - Target url
     #
     def deliver(url)
-      payload = MultiJson.encode({:capistrano => @data}.merge(@params))
+      payload = MultiJson.encode({
+        :capistrano      => @data,
+        :payload_version => CapistranoPayload::VERSION
+      }.merge(@params))
+      
       begin
         RestClient.post(url, payload, :content_type => :json)
       rescue Exception => ex
