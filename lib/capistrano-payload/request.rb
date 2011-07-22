@@ -5,7 +5,8 @@ module CapistranoPayload
     
     CONTENT_TYPES = {
       :form => 'application/x-www-form-urlencoded',
-      :json => 'application/json'
+      :json => 'application/json',
+      :yaml => 'application/x-yaml'
     }.freeze
     
     # Performs a HTTP request
