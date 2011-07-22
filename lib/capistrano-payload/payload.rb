@@ -34,12 +34,13 @@ module CapistranoPayload
     # format  - Payload format (:json, :form)
     # params  - Extra parameters to payload (api_key, etc.), default: {}
     #           Could not contain 'capistrano' key. Will be removed if present.
+    #           Should be a hash
     # 
     def initialize(action, message, data, format, params={})
       @action = action
       @data   = data.merge(:action => action, :message => message.strip)
       @format = format.to_sym
-      @params = params
+      @params = params.kind_of?(Hash) ? params : {}
       
       unless ACTIONS.include?(@action)
         raise ConfigurationError, "Invalid payload action: #{action}."
@@ -50,10 +51,10 @@ module CapistranoPayload
         raise ConfigurationError, "Invalid payload format: #{format}."
       end
       
-      # Check if we have 'capistrano' keys (string or symbolic)
+      # Check if we have 'payload' keys (string or symbolic)
       unless @params.empty?
-        @params.delete(:capistrano)      ; @params.delete('capistrano')
-        @params.delete(:payload_version) ; @params.delete('payload_version')
+        @params.delete(:payload)
+        @params.delete(:payload)
       end
     end
     
@@ -64,7 +65,7 @@ module CapistranoPayload
     def deliver(url)
       payload = self.send(FORMAT_METHODS[@format])
       begin
-        request(:post, url, {:payload => payload}, format)
+        request(:post, url, {:payload => payload}.merge(@params), format)
       rescue Exception => ex
         raise DeliveryError, ex.message
       end
@@ -78,7 +79,7 @@ module CapistranoPayload
       payload = {
         :capistrano      => @data,
         :payload_version => CapistranoPayload::VERSION
-      }.merge(@params)
+      }
     end
     
     # Returns a payload as json

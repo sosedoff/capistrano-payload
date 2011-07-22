@@ -25,8 +25,9 @@ The best way to test out is to use http://www.postbin.org/.
 
 ## Options
 
-- payload_url - Primary URL where the data would be sent (required)
-- payload_format - Payload format. Must be one of :json (default), :form. 
+- payload_url    &mdash; Primary URL where the data would be sent (required)
+- payload_format &mdash; Payload format. Must be one of :json (default), :form.
+- payload_params &mdash; Extra parameters to the request (api_key, etc.). *Note: extra parameters wont be added to the payload.*
 
 ## Payload structure
 
@@ -51,7 +52,7 @@ Here is the sample payload:
         },
         "action": "deploy"
       },
-      "payload_version": "0.1.4"
+      "payload_version": "0.2.0"
     }
 
 That's it. Ready to roll.

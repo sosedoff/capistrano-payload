@@ -11,6 +11,7 @@ module CapistranoPayload
         }
         
         _cset(:payload_format) { :json }
+        _cset(:payload_params) { Hash.new }
         
         _cset(:payload_data) {
           {
@@ -34,7 +35,7 @@ module CapistranoPayload
             logger.debug("Sending deployment notification to #{fetch(:payload_url)}")
             message = Capistrano::CLI.ui.ask("Deployment message (none): ", nil)
             begin
-              CapistranoPayload::Payload.new('deploy', message, payload_data, payload_format).deliver(payload_url)
+              CapistranoPayload::Payload.new('deploy', message, payload_data, payload_format, payload_params).deliver(payload_url)
             rescue DeliveryError => err
               logger.debug("Payload delivery error: #{err.message}")
             rescue ConfigurationError => err
@@ -46,7 +47,7 @@ module CapistranoPayload
             logger.debug("Sending rollback notification to #{fetch(:payload_url)}")
             message = Capistrano::CLI.ui.ask("Rollback message (none): ", nil)
             begin
-              CapistranoPayload::Payload.new('rollback', message, payload_data, payload_format).deliver(payload_url)
+              CapistranoPayload::Payload.new('rollback', message, payload_data, payload_format, payload_params).deliver(payload_url)
             rescue DeliveryError => err
               logger.debug("Payload delivery error: #{err.message}")
             rescue ConfigurationError => err
