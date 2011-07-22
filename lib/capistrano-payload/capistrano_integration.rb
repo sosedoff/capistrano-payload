@@ -1,5 +1,6 @@
 require 'capistrano'
 require 'capistrano/version'
+require 'socket'
 
 module CapistranoPayload
   class CapistranoIntegration
@@ -17,7 +18,7 @@ module CapistranoPayload
             :application     => fetch(:application),
             :deployer        => {
               :user          => ENV['USER'] || ENV['USERNAME'] || 'n/a',
-              :hostname      => ENV['HOSTNAME'] || `hostname`.strip
+              :hostname      => ENV['HOSTNAME'] || Socket.gethostname
             },
             :timestamp       => Time.now,
             :source          => {
