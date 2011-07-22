@@ -20,4 +20,5 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'capistrano',  '~> 2.6'
   gem.add_runtime_dependency 'rest-client', '~> 1.6'
   gem.add_runtime_dependency 'multi_json',  '~> 1.0'
+  gem.add_runtime_dependency 'builder',     '~> 3.0'
 end
