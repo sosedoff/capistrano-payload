@@ -15,7 +15,10 @@ module CapistranoPayload
           {
             :version         => Capistrano::Version.to_s.strip,
             :application     => fetch(:application),
-            :deployer        => ENV['USER'] || ENV['USERNAME'] || 'n/a',
+            :deployer        => {
+              :user          => ENV['USER'] || ENV['USERNAME'] || 'n/a',
+              :hostname      => ENV['HOSTNAME'] || `hostname`.strip
+            },
             :timestamp       => Time.now,
             :source          => {
               :branch        => fetch(:branch),
