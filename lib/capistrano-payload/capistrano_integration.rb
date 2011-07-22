@@ -1,4 +1,5 @@
 require 'capistrano'
+require 'capistrano/version'
 
 module CapistranoPayload
   class CapistranoIntegration
@@ -12,7 +13,7 @@ module CapistranoPayload
         
         _cset(:payload_data) {
           {
-            :version         => Capistrano::Version.to_s,
+            :version         => Capistrano::Version.to_s.strip,
             :application     => fetch(:application),
             :deployer        => ENV['USER'] || ENV['USERNAME'] || 'n/a',
             :timestamp       => Time.now,

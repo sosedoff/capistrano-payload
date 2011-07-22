@@ -31,6 +31,7 @@ Here is the sample payload:
 
     {
       "capistrano": {
+        "version": "2.6.0",
         "application": "APP_NAME",
         "deployer": "sosedoff",
         "timestamp": "2011-07-21 19:09:52 -0500",
