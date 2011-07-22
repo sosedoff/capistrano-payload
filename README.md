@@ -23,6 +23,11 @@ To test if it works type:
     
 The best way to test out is to use http://www.postbin.org/.
 
+## Options
+
+- payload_url - Primary URL where the data would be sent (required)
+- payload_format - Payload format. Must be one of :json (default), :form. 
+
 ## Payload structure
 
 Plugin will sent JSON-encoded data via POST method.
