@@ -1,0 +1,19 @@
+{
+    "capistrano": {
+        "version": "2.6.0",
+        "application": "foobar",
+        "deployer": {
+            "user": "username",
+            "hostname": "localhost"
+        },
+        "timestamp": "2011-01-01 00:00:00 -0600",
+        "source": {
+            "branch": "master",
+            "revision": "abcdef",
+            "repository": "git@github.com:username/repo.git"
+        },
+        "action": "deploy",
+        "message": "Comment"
+    },
+    "payload_version": "0.3.0"
+}

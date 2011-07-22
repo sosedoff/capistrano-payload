@@ -15,10 +15,12 @@ Gem::Specification.new do |gem|
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{|f| File.basename(f)}
   gem.require_paths = ['lib']
 
-  gem.add_development_dependency 'rspec', '~> 2.6'
+  gem.add_development_dependency 'rspec',      '~> 2.6'
+  gem.add_development_dependency 'xml-simple', '~> 1.1'
+  gem.add_development_dependency 'webmock',    '~> 1.6'
   
-  gem.add_runtime_dependency 'capistrano',  '~> 2.6'
-  gem.add_runtime_dependency 'rest-client', '~> 1.6'
-  gem.add_runtime_dependency 'multi_json',  '~> 1.0'
-  gem.add_runtime_dependency 'builder',     '~> 3.0'
+  gem.add_runtime_dependency 'capistrano',     '~> 2.6'
+  gem.add_runtime_dependency 'rest-client',    '~> 1.6'
+  gem.add_runtime_dependency 'multi_json',     '~> 1.0'
+  gem.add_runtime_dependency 'builder',        '~> 3.0'
 end

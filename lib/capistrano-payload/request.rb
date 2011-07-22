@@ -29,7 +29,8 @@ module CapistranoPayload
         :open_timeout => OPEN_TIMEOUT
       }
       
-      RestClient::Request.execute(opts)
+      resp = RestClient::Request.execute(opts)
+      resp
     end
   end
 end
