@@ -1,4 +1,3 @@
-
 # Capistrano Payload
 
 Capistrano plugin that delivers JSON-encoded deployment information via POST to the URL of your choice.
@@ -23,12 +22,12 @@ To test if it works type:
     
 The best way to test out is to use http://www.postbin.org/.
 
-## Options
+## Configuration options
 
 - payload_url     &mdash; Primary URL where the data would be sent (required)
 - payload_format  &mdash; Payload format. Must be one of :json (default), :form, :yaml, :xml
 - payload_params  &mdash; Extra parameters to the request (api_key, etc.). *Note: extra parameters wont be added to the payload.*
-- payload_message &mdash; Ask for deployment comment. (default: true)
+- payload_prompt  &mdash; Ask for deployment comment. (default: true)
 
 ## Payload structure
 
@@ -39,21 +38,21 @@ Here is an example data:
     {
       "capistrano": {
         "version": "2.6.0",
-        "application": "APP_NAME",
+        "application": "foobar",
         "deployer": {
-          "user": "sosedoff",
-          "hostname": "localhost",
-        }
-        "timestamp": "2011-07-21 19:09:52 -0500",
-        "message": "Release 1.0.0", 
+          "user": "username",
+          "hostname": "localhost"
+        },
+        "timestamp": "2011-01-01 00:00:00 -0600",
         "source": {
           "branch": "master",
-          "revision": "b18ffa822c16c028765800d0c4d22bfd5e4f3bf9",
-          "repository": "git@github.com:repository.git"
+          "revision": "abcdef",
+          "repository": "git@github.com:username/repo.git"
         },
-        "action": "deploy"
+        "action": "deploy",
+        "message": "Comment"
       },
-      "payload_version": "0.2.0"
+      "payload_version": "0.4.0"
     }
 
 That's it. Ready to roll.
