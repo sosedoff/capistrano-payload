@@ -1,7 +1,4 @@
 module CapistranoPayload
-  class ConfigurationError < StandardError ; end
-  class DeliveryError      < StandardError ; end
-  
   class Payload
     include CapistranoPayload::Format
     include CapistranoPayload::Request
